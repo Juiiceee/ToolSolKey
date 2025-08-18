@@ -1,5 +1,19 @@
-import web3 from "@solana/web3.js";
 import bs58 from 'bs58';
-import id from "./array.json";
-let secretKey = new Uint8Array(id);
-console.log(bs58.encode(secretKey));
+import promptSync from 'prompt-sync';
+
+const prompt = promptSync({ sigint: true });
+
+try {
+  const input = prompt('Entrez votre array de nombres (format: [1,2,3,4...]): ', { echo: '*' });
+  
+  if (!input) {
+    console.error('Erreur: Aucune saisie détectée.');
+    process.exit(1);
+  }
+  
+  const array = JSON.parse(input);
+  const secretKey = new Uint8Array(array);
+  console.log('Clé BS58:', bs58.encode(secretKey));
+} catch (error) {
+  console.error('Erreur: Format d\'array invalide. Utilisez le format [1,2,3,4...]');
+}
