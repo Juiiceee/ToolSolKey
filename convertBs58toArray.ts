@@ -5,7 +5,12 @@ import promptSync from 'prompt-sync';
 const prompt = promptSync({ sigint: true });
 
 try {
-  const input = prompt('Entrez votre clé privée en format BS58: ', { echo: '*' });
+  // Récupère l'argument ou demande une saisie interactive
+  let input = process.argv[2];
+  
+  if (!input) {
+    input = prompt('Entrez votre clé privée en format BS58: ', { echo: '*' });
+  }
   
   if (!input) {
     console.error('Erreur: Aucune saisie détectée.');

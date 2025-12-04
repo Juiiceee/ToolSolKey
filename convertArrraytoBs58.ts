@@ -4,7 +4,12 @@ import promptSync from 'prompt-sync';
 const prompt = promptSync({ sigint: true });
 
 try {
-  const input = prompt('Entrez votre array de nombres (format: [1,2,3,4...]): ', { echo: '*' });
+  // Récupère l'argument ou demande une saisie interactive
+  let input = process.argv[2];
+  
+  if (!input) {
+    input = prompt('Entrez votre array de nombres (format: [1,2,3,4...]): ', { echo: '*' });
+  }
   
   if (!input) {
     console.error('Erreur: Aucune saisie détectée.');
